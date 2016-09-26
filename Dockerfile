@@ -5,6 +5,7 @@ MAINTAINER Minho <longfei6671@163.com>
 #Alpine packages
 RUN apk add --update bash git make gcc \
 	libc-dev \
+	autoconf \
 	freetype-dev \
 	libjpeg-turbo-dev \
 	libpng-dev \
