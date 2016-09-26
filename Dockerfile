@@ -1,13 +1,8 @@
 FROM php:7.0-fpm-alpine
 
 MAINTAINER Minho <longfei6671@163.com>
-RUN echo "http://mirrors.aliyun.com/alpine/v3.4/main" > /etc/apk/repositories \
-	&& echo "http://mirrors.aliyun.com/alpine/v3.4/community" >> /etc/apk/repositories
 
 #Alpine packages
-RUN apk add --update .phpize-deps 
-RUN apk add .build-deps
-	
 RUN apk add --update bash freetype-dev libjpeg-turbo-dev libpng-dev libmcrypt-dev libpcre3-dev bzip2 libbz2-dev libmemcached-dev bzip2 binutils ca-certificates && rm -rf /var/cache/apk/*
 
 
