@@ -2,6 +2,9 @@ FROM daocloud.io/library/php:7.0-fpm-alpine
 
 MAINTAINER Minho <longfei6671@163.com>
 
+ADD conf/php.ini /usr/local/etc/php/php.ini
+ADD conf/www.conf /usr/local/etc/php-fpm.d/www.conf
+
 #Alpine packages
 RUN apk add --update bash git make gcc \
 	libc-dev \
