@@ -10,7 +10,7 @@ RUN apk add libpng-dev
 RUN apk add libmcrypt-dev 
 RUN apk add libpcre32
 RUN apk add bzip2 
-RUN apk add libbz2-dev 
+RUN apk add libbz2
 RUN apk add libmemcached-dev 
 RUN apk add bzip2 binutils 
 RUN apk add ca-certificates && rm -rf /var/cache/apk/*
