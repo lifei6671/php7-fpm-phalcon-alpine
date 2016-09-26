@@ -1,4 +1,4 @@
-FROM php:7.0-fpm-alpine
+FROM daocloud.io/library/php:7.0-fpm-alpine
 
 MAINTAINER Minho <longfei6671@163.com>
 
