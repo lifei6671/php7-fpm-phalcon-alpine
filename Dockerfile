@@ -6,7 +6,11 @@ MAINTAINER Minho <longfei6671@163.com>
 RUN apk add --update bash 
 RUN apk add freetype-dev 
 RUN apk add libjpeg-turbo-dev 
-RUN apk add libpng-dev libmcrypt-dev libpcre3-dev bzip2 libbz2-dev libmemcached-dev bzip2 binutils ca-certificates && rm -rf /var/cache/apk/*
+RUN apk add libpng-dev 
+RUN apk add libmcrypt-dev 
+RUN apk add libpcre3-dev
+RUN apk add bzip2 
+RUN apk add libbz2-dev libmemcached-dev bzip2 binutils ca-certificates && rm -rf /var/cache/apk/*
 
 
 RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
