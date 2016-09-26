@@ -1,4 +1,4 @@
-FROM daocloud.io/library/php:7.0-fpm-alpine
+FROM php:7.0-fpm-alpine
 
 MAINTAINER Minho <longfei6671@163.com>
 RUN echo "http://mirrors.aliyun.com/alpine/v3.4/main" > /etc/apk/repositories \
