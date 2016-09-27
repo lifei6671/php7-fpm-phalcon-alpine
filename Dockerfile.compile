@@ -36,7 +36,7 @@ WORKDIR /usr/src/php/ext/
 
 # Compile Memcached 
 RUN git clone https://github.com/php-memcached-dev/php-memcached.git \
-	&& docker-php-ext-configure php-memcached \
+	&& docker-php-ext-configure php-memcached --disable-memcached-sasl \
 	&& docker-php-ext-install php-memcached \
 	&& rm -rf php-memcached
 	
