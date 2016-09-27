@@ -7,6 +7,7 @@ ADD conf/www.conf /usr/local/etc/php-fpm.d/www.conf
 
 #Alpine packages
 RUN apk add --update git make gcc \
+	re2c \
 	libc-dev \
 	autoconf \
 	freetype-dev \
@@ -34,8 +35,17 @@ RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-di
 		
 WORKDIR /usr/src/php/ext/
 
+RUN git clone https://github.com/php-memcached-dev/php-memcached.git \
+	&& docker-php-ext-configure php-memcached \
+	&& docker-php-ext-install php-memcached \
+	&& rm -rf php-memcached
+	
 ENV PHPREDIS_VERSION=3.0.0
 
+RUN set -xe && \
+	curl -LO http://pecl.php.net/get/igbinary-1.1.1.tgz && \
+	tar xzf igbinary-1.1.1.tgz && cd igbinary-1.1.1 && phpize && ./configure  && make && make install
+	
 RUN set -xe && \
 	curl -LO https://github.com/phpredis/phpredis/archive/${PHPREDIS_VERSION}.tar.gz && \
 	tar xzf ${PHPREDIS_VERSION}.tar.gz && cd phpredis-${PHPREDIS_VERSION} && phpize ./configure --enable-redis-igbinary && make && make install && \
