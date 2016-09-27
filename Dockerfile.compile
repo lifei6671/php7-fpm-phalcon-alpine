@@ -35,6 +35,10 @@ RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-di
 		
 WORKDIR /usr/src/php/ext/
 
+RUN git clone -b php7-dev-playground2 https://github.com/igbinary/igbinary.git && \
+	cd igbinary && phpize && ./configure CFLAGS="-O2 -g" --enable-igbinary && make install && \
+	cd ../ && rm -rf igbinary
+	
 # Compile Memcached 
 RUN git clone https://github.com/php-memcached-dev/php-memcached.git && \
 	cd php-memcached && phpize && ./configure --disable-memcached-sasl --without-memcached LDFLAGS=-Wl,--as-neede && make && make install && \
