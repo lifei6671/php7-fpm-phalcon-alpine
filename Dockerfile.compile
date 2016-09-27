@@ -37,6 +37,12 @@ RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-di
 		
 WORKDIR /usr/src/php/ext/
 
+RUN set -xe && \
+	curl -LO  wget  https://launchpad.net/libmemcached/1.0/1.0.16/+download/libmemcached-1.0.16.tar.gz  && \
+	tar zxvf libmemcached-1.0.16.tar.gz -C /usr/local/src/ && \
+	cd /usr/local/src/libmemcached-1.0.16/  && \
+	./configure -prefix=/usr/local/libmemcached --with-memcached && make && make install
+
 RUN git clone -b php7-dev-playground2 https://github.com/igbinary/igbinary.git && \
 	cd igbinary && phpize && ./configure CFLAGS="-O2 -g" --enable-igbinary && make install && \
 	cd ../ && rm -rf igbinary
