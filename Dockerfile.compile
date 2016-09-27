@@ -18,8 +18,6 @@ RUN apk add --update git make gcc sed \
 	libbz2 \
 	libsasl \
 	libgsasl \
-	libmemcached \
-	libmemcached-dev \
 	bzip2 \
 	binutils \
 	&& rm -rf /var/cache/apk/* 
@@ -40,6 +38,11 @@ WORKDIR /usr/src/php/ext/
 RUN git clone -b php7-dev-playground2 https://github.com/igbinary/igbinary.git && \
 	cd igbinary && phpize && ./configure CFLAGS="-O2 -g" --enable-igbinary && make install && \
 	cd ../ && rm -rf igbinary
+	
+ENV LIBMEMCACHED_VERSION=1.0.18
+RUN set -xe && \
+	curl -LO https://launchpad.net/libmemcached/1.0/1.0.18/+download/libmemcached-${LIBMEMCACHED_VERSION}.tar.gz && \
+	tar xzf libmemcached-${LIBMEMCACHED_VERSION}.tar.gz && cd libmemcached-${LIBMEMCACHED_VERSION} &&  ./configure --enable-sasl --without-memcached LDFLAGS=-Wl,--as-neede && make && make install
 	
 # Compile Memcached 
 RUN git clone https://github.com/php-memcached-dev/php-memcached.git && \
