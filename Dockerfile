@@ -63,6 +63,7 @@ RUN set -xe && \
 	
 ENV PHALCON_VERSION=3.0.1
 
+WORKDIR /usr/src/php/ext/
 # Compile Phalcon
 RUN set -xe && \
         curl -LO https://github.com/phalcon/cphalcon/archive/v${PHALCON_VERSION}.tar.gz && \
