@@ -19,7 +19,6 @@ RUN apk add --update git make gcc g++ \
 	libmemcached-dev \
 	cyrus-sasl-dev \
 	bzip2 \
-	binutils \
 	&& rm -rf /var/cache/apk/* 
 
 
@@ -62,6 +61,7 @@ RUN set -xe && \
     tar xzf v${PHALCON_VERSION}.tar.gz && cd cphalcon-${PHALCON_VERSION}/build && sh install && \
     echo "extension=phalcon.so" > /usr/local/etc/php/conf.d/phalcon.ini && \
     cd ../.. && rm -rf v${PHALCON_VERSION}.tar.gz cphalcon-${PHALCON_VERSION} 
-	
+
 #Delete apk
-RUN apk del gcc g++ git make;
+RUN apk del gcc g++ git make && \
+	rm -rf /tmp/*
