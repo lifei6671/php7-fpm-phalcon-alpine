@@ -42,6 +42,7 @@ RUN git clone -b php7-dev-playground1 https://github.com/igbinary/igbinary.git &
 # Compile Memcached 
 RUN git clone -b php7 https://github.com/php-memcached-dev/php-memcached.git && \
 	cd php-memcached && phpize && ./configure && make && make install && \
+	echo "extension=memcached.so" > /usr/local/etc/php/conf.d/phpredis.ini && \
 	cd .. && rm -rf php-memcached 
 	
 ENV PHPREDIS_VERSION=3.0.0
@@ -49,7 +50,7 @@ ENV PHPREDIS_VERSION=3.0.0
 RUN set -xe && \
 	curl -LO https://github.com/phpredis/phpredis/archive/${PHPREDIS_VERSION}.tar.gz && \
 	tar xzf ${PHPREDIS_VERSION}.tar.gz && cd phpredis-${PHPREDIS_VERSION} && phpize && ./configure --enable-redis-igbinary && make && make install && \
-	echo "extension=phpredis.so" > /usr/local/etc/php/conf.d/phpredis.ini && \
+	echo "extension=redis.so" > /usr/local/etc/php/conf.d/phpredis.ini && \
 	cd ../ && rm -rf  phpredis-${PHPREDIS_VERSION} ${PHPREDIS_VERSION}.tar.gz
 	
 ENV PHALCON_VERSION=3.0.1
