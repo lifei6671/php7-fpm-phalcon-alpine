@@ -37,13 +37,14 @@ WORKDIR /usr/src/php/ext/
 
 # Compile Memcached 
 RUN git clone https://github.com/php-memcached-dev/php-memcached.git && \
-	cd php-memcached && phpize && ./configure --disable-memcached-sasl && make && make install && \
+	cd php-memcached && phpize && ./configure --disable-memcached-sasl --without-memcached LDFLAGS=-Wl,--as-neede && make && make install && \
 	cd .. && rm -rf php-memcached 
 	
+ENV IGBINARY_VERSION=1.2.1
 RUN set -xe && \
-	curl -LO http://pecl.php.net/get/igbinary-1.1.1.tgz && \
-	tar xzf igbinary-1.1.1.tgz && cd igbinary-1.1.1 && phpize && ./configure  && make && make install && \
-	cd .. && rm -rf igbinary-1.1.1 igbinary-1.1.1.tgz
+	curl -LO http://pecl.php.net/get/igbinary-${IGBINARY_VERSION}.tgz && \
+	tar xzf igbinary-${IGBINARY_VERSION}.tgz && cd igbinary-${IGBINARY_VERSION} && phpize && ./configure  && make && make install && \
+	cd .. && rm -rf igbinary-${IGBINARY_VERSION} igbinary-${IGBINARY_VERSION}.tgz
 	
 ENV PHPREDIS_VERSION=3.0.0
 
