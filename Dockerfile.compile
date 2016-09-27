@@ -49,8 +49,8 @@ RUN git clone -b php7-dev-playground2 https://github.com/igbinary/igbinary.git &
 	cd ../ && rm -rf igbinary
 	
 # Compile Memcached 
-RUN git clone https://github.com/php-memcached-dev/php-memcached.git && \
-	cd php-memcached && phpize && ./configure --disable-memcached-sasl && make && make install && \
+RUN git clone -b php7 https://github.com/php-memcached-dev/php-memcached.git && \
+	cd php-memcached && phpize && ./configure && make && make install && \
 	cd .. && rm -rf php-memcached 
 	
 ENV IGBINARY_VERSION=1.2.1
