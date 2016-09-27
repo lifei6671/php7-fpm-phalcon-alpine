@@ -1,0 +1,25 @@
+FROM daocloud.io/library/php:7.0-fpm-alpine
+
+MAINTAINER Minho <longfei6671@163.com>
+
+ADD conf/php.ini /usr/local/etc/php/php.ini
+ADD conf/www.conf /usr/local/etc/php-fpm.d/www.conf
+
+#Alpine packages
+RUN apk add --update \
+	libc-dev \
+	autoconf \
+	freetype-dev \
+	libjpeg-turbo-dev \
+	libpng-dev \
+	libmcrypt-dev \
+	libpcre32 \
+	bzip2 \
+	libbz2 \
+	libmemcached-dev \
+	bzip2 \
+	binutils \
+	&& rm -rf /var/cache/apk/* 
+
+
+		
