@@ -22,4 +22,11 @@ RUN apk add --update \
 	&& rm -rf /var/cache/apk/* 
 
 
+RUN docker-php-ext-install gd \
+    && docker-php-ext-install mysqli \
+    && docker-php-ext-install bz2 \
+    && docker-php-ext-install zip \
+    && docker-php-ext-install pdo \
+    && docker-php-ext-install pdo_mysql \
+    && docker-php-ext-install opcache
 		

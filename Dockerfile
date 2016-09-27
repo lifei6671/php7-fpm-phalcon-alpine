@@ -1,4 +1,4 @@
-FROM daocloud.io/library/php:7.0-fpm-alpine
+FROM php:7.0-fpm-alpine
 
 MAINTAINER Minho <longfei6671@163.com>
 
@@ -16,9 +16,6 @@ RUN apk add --update git make gcc g++ \
 	libpcre32 \
 	bzip2 \
 	libbz2 \
-	libsasl \
-	libgsasl \
-	libmemcached \
 	libmemcached-dev \
 	cyrus-sasl-dev \
 	bzip2 \
@@ -37,12 +34,6 @@ RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-di
 
 		
 WORKDIR /usr/src/php/ext/
-
-#RUN set -xe && \
-#	curl -LO  https://launchpad.net/libmemcached/1.0/1.0.16/+download/libmemcached-1.0.16.tar.gz  && \
-#	tar zxvf libmemcached-1.0.16.tar.gz && \
-#	cd libmemcached-1.0.16  && \
-#	./configure -prefix=/usr/local/libmemcached --with-memcached && make && make install
 
 RUN git clone -b php7-dev-playground1 https://github.com/igbinary/igbinary.git && \
 	cd igbinary && phpize && ./configure CFLAGS="-O2 -g" --enable-igbinary && make install && \
@@ -66,7 +57,10 @@ ENV PHALCON_VERSION=3.0.1
 WORKDIR /usr/src/php/ext/
 # Compile Phalcon
 RUN set -xe && \
-        curl -LO https://github.com/phalcon/cphalcon/archive/v${PHALCON_VERSION}.tar.gz && \
-        tar xzf v${PHALCON_VERSION}.tar.gz && cd cphalcon-${PHALCON_VERSION}/build && sh install && \
-        echo "extension=phalcon.so" > /usr/local/etc/php/conf.d/phalcon.ini && \
-        cd ../.. && rm -rf v${PHALCON_VERSION}.tar.gz cphalcon-${PHALCON_VERSION} 
+    curl -LO https://github.com/phalcon/cphalcon/archive/v${PHALCON_VERSION}.tar.gz && \
+    tar xzf v${PHALCON_VERSION}.tar.gz && cd cphalcon-${PHALCON_VERSION}/build && sh install && \
+    echo "extension=phalcon.so" > /usr/local/etc/php/conf.d/phalcon.ini && \
+    cd ../.. && rm -rf v${PHALCON_VERSION}.tar.gz cphalcon-${PHALCON_VERSION} 
+	
+#Delete apk
+RUN apk del gcc g++ git make;
