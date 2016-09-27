@@ -16,10 +16,11 @@ RUN apk add --update git make gcc sed \
 	libpcre32 \
 	bzip2 \
 	libbz2 \
+	libsasl \
+	libgsasl \
 	libmemcached-dev \
 	bzip2 \
 	binutils \
-	libsasl \
 	&& rm -rf /var/cache/apk/* 
 
 
