@@ -38,7 +38,7 @@ ENV PHPREDIS_VERSION=3.0.0
 
 RUN set -xe && \
 	curl -LO https://github.com/phpredis/phpredis/archive/${PHPREDIS_VERSION}.tar.gz && \
-	tar xzf ${PHPREDIS_VERSION}.tar.gz && cd phpredis-${PHPREDIS_VERSION} && phpize ./configure --enable-redis-igbinary && make && make install && \
+	tar xzf ${PHPREDIS_VERSION}.tar.gz && cd phpredis-${PHPREDIS_VERSION} && phpize && ./configure --enable-redis-igbinary && make && make install && \
 	echo "extension=phpredis.so" > /usr/local/etc/php/conf.d/phpredis.ini && \
 	cd ../ && rm -rf  phpredis-${PHPREDIS_VERSION} ${PHPREDIS_VERSION}.tar.gz
 	
