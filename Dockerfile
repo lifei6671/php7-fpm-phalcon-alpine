@@ -36,6 +36,7 @@ WORKDIR /usr/src/php/ext/
 
 RUN git clone -b php7-dev-playground1 https://github.com/igbinary/igbinary.git && \
 	cd igbinary && phpize && ./configure CFLAGS="-O2 -g" --enable-igbinary && make install && \
+	echo "extension=igbinary.so" > /usr/local/etc/php/conf.d/igbinary.ini && \
 	cd ../ && rm -rf igbinary
 	
 # Compile Memcached 
