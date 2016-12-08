@@ -16,9 +16,9 @@ RUN apk add --update git make gcc g++ \
 	libpcre32 \
 	bzip2 \
 	libbz2 \
+	bzip2-devel \
 	libmemcached-dev \
 	cyrus-sasl-dev \
-	bzip2 \
 	binutils \
 	&& rm -rf /var/cache/apk/* 
 

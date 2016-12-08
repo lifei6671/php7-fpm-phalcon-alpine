@@ -17,10 +17,10 @@ RUN apk add --update \
 	libmcrypt-dev \
 	libpcre32 \
 	bzip2 \
+	bzip2-devel \
 	libbz2 \
 	libmemcached-dev \
 	cyrus-sasl-dev \
-	bzip2 \
 	binutils \
 	&& rm -rf /var/cache/apk/* 
 
