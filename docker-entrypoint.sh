@@ -24,9 +24,11 @@ if [ ! -f /xdebug_configured ]; then
 	echo "xdebug.remote_autostart=On" >> /usr/local/etc/php/conf.d/xdebug.ini
 	echo "xdebug.profiler_enable=On" >> /usr/local/etc/php/conf.d/xdebug.ini
 	echo "xdebug.idekey=$IDEKEY" >> /usr/local/etc/php/conf.d/xdebug.ini
-	echo "=> Xdebug is configured."
+	
 	
     touch /xdebug_configured
+	
+	echo "=> Xdebug is configured."
 else
     echo "=> Xdebug is already configured"
 fi
