@@ -9,8 +9,6 @@ ADD conf/www.conf /usr/local/etc/php-fpm.d/www.conf
 
 #Alpine packages
 RUN apk add --update \
-    ca-certificates \
-	tzdata \
 	libc-dev \
 	autoconf \
 	freetype-dev \
@@ -26,7 +24,9 @@ RUN apk add --update \
 	binutils \
 	&& rm -rf /var/cache/apk/* 
 
-RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
+RUN apk update && apk add ca-certificates && \
+    apk add tzdata && \
+    ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
     echo "Asia/Shanghai" > /etc/timezone
 	
 RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
