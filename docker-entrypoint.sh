@@ -26,7 +26,7 @@ if [ ! -f /xdebug_configured ]; then
 	echo "xdebug.idekey=$IDEKEY" >> /usr/local/etc/php/conf.d/xdebug.ini
 	
 	
-    touch /xdebug_configured
+    echo "true" > /xdebug_configured
 	
 	echo "=> Xdebug is configured."
 else
