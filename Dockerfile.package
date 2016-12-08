@@ -17,7 +17,7 @@ RUN apk add --update \
 	libmcrypt-dev \
 	libpcre32 \
 	bzip2 \
-	bzip2-devel \
+	bzip2-dev \
 	libbz2 \
 	libmemcached-dev \
 	cyrus-sasl-dev \
