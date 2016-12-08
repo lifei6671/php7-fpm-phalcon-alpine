@@ -31,7 +31,7 @@ else
     echo "=> Xdebug is already configured"
 fi
 
-exec php-fpm
+#exec php-fpm
 
 # first arg is `-f` or `--some-option`
 # or first arg is `something.conf`
