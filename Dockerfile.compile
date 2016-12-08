@@ -53,7 +53,7 @@ RUN set -xe && \
 	echo "extension=redis.so" > /usr/local/etc/php/conf.d/phpredis.ini && \
 	cd ../ && rm -rf  phpredis-${PHPREDIS_VERSION} ${PHPREDIS_VERSION}.tar.gz
 	
-ENV PHALCON_VERSION=3.0.1
+ENV PHALCON_VERSION=3.0.2
 
 WORKDIR /usr/src/php/ext/
 # Compile Phalcon
