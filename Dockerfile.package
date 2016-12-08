@@ -2,7 +2,7 @@ FROM php:7.1-fpm-alpine
 
 MAINTAINER Minho <longfei6671@163.com>
 
-COPY usr/local/lib/php/extensions/no-debug-non-zts-20151012 /usr/local/lib/php/extensions/no-debug-non-zts-20151012
+COPY usr/local/lib/php/extensions/no-debug-non-zts-20160303 /usr/local/lib/php/extensions/no-debug-non-zts-20160303/
 
 ADD conf/php.ini /usr/local/etc/php/php.ini
 ADD conf/www.conf /usr/local/etc/php-fpm.d/www.conf
