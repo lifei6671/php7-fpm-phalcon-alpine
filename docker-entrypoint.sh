@@ -41,4 +41,4 @@ fi
 #	set -- php-fpm "$@"
 #fi
 
-#exec "$@"
+exec "$@"
