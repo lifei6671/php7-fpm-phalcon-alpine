@@ -66,9 +66,9 @@ RUN set -xe && \
 #Compile XDebug
 RUN set -xe && \
 	curl -LO https://github.com/xdebug/xdebug/archive/XDEBUG_2_5_0.tar.gz && \
-	tar xzf XDEBUG_2_4_1.tar.gz && cd xdebug-XDEBUG_2_4_1 && \
+	tar xzf XDEBUG_2_5_0.tar.gz && cd xdebug-XDEBUG_2_5_0 && \
 	phpize && ./configure --enable-xdebug && make && make install && \
-	cd ../ && rm -rf xdebug-XDEBUG_2_4_1
+	cd ../ && rm -rf xdebug-XDEBUG_2_5_0
 
 RUN docker-php-source extract \
 	&& cd /usr/src/php/ext/bcmath \
