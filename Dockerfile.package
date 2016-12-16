@@ -8,7 +8,7 @@ ADD conf/php.ini /usr/local/etc/php/php.ini
 ADD conf/www.conf /usr/local/etc/php-fpm.d/www.conf
 
 #Alpine packages
-RUN apk add --update \
+RUN apk add --update make gcc g++ \
 	libc-dev \
 	autoconf \
 	freetype-dev \
