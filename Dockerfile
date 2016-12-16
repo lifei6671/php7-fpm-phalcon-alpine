@@ -96,7 +96,7 @@ RUN set -xe && \
 
 RUN set -xe && \
 	curl -LO https://github.com/mkoppanen/imagick/archive/3.4.2.tar.gz && \
-	tar zxvf  3.4.2.tar.gz && cd imagick-3.4.2 && phpize && ./configure  --with-php-config=/usr/local/bin/php-configa --with-imagick=/usr/local/imagemagick && make && make install
+	tar zxvf  3.4.2.tar.gz && cd imagick-3.4.2 && phpize && ./configure  --with-php-config=/usr/local/bin/php-config --with-imagick=/usr/local/imagemagick && make && make install
 	
 	
 	
