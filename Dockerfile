@@ -5,8 +5,9 @@ MAINTAINER Minho <longfei6671@163.com>
 ADD conf/php.ini /usr/local/etc/php/php.ini
 ADD conf/www.conf /usr/local/etc/php-fpm.d/www.conf
 
+ENV IMAGICK_VERSION 3.4.2
 #Alpine packages
-RUN apk add --update git make gcc g++ \
+RUN apk add --update git make gcc g++ imagemagick-dev \
 	libc-dev \
 	autoconf \
 	freetype-dev \
@@ -20,6 +21,7 @@ RUN apk add --update git make gcc g++ \
 	libmemcached-dev \
 	cyrus-sasl-dev \
 	binutils \
+	&& pecl install imagick-$IMAGICK_VERSION \
 	&& rm -rf /var/cache/apk/* 
 
 RUN apk update && apk add ca-certificates && \
@@ -96,8 +98,3 @@ RUN set -xe && \
 RUN set -xe && \
 	curl -LO https://github.com/mkoppanen/imagick/archive/3.4.2.tar.gz && \
 	tar zxvf  3.4.2.tar.gz && cd imagick-3.4.2 && phpize && ./configure  --with-php-config=/usr/local/bin/php-config --with-imagick=/usr/local/lib && make && make install
-	
-	
-	
-#Delete apk
-RUN apk del gcc g++ git make;
