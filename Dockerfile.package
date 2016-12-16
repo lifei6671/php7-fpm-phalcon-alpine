@@ -49,7 +49,12 @@ COPY docker-entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 RUN ln -s usr/local/bin/docker-entrypoint.sh /entrypoint.sh # backwards compat
 
-
+#ImageMagick
+RUN set -xe && \
+	curl -LO ftp://ftp.imagemagick.org/pub/ImageMagick/ImageMagick-7.0.3-10.tar.gz && \
+	tar zxvf ImageMagick-7.0.3-10.tar.gz && cd ImageMagick-7.0.3-10 && ./configure --prefix=/usr/local/imagemagick && make && make install && \
+	make clean && \
+	cd .. && rm -rf ImageMagick-7.0.3-10.tar.gz
 
 
 EXPOSE 9000
