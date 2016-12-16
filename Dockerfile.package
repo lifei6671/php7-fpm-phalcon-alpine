@@ -54,7 +54,10 @@ RUN set -xe && \
 	curl -LO ftp://ftp.imagemagick.org/pub/ImageMagick/ImageMagick-7.0.3-10.tar.gz && \
 	tar zxvf ImageMagick-7.0.3-10.tar.gz && cd ImageMagick-7.0.3-10 && ./configure --prefix=/usr/local/imagemagick && make && make install && \
 	make clean && \
-	cd .. && rm -rf ImageMagick-7.0.3-10.tar.gz
+	cd .. && rm -rf ImageMagick-7.0.3-10.tar.gz ImageMagick-7.0.3-10
+
+RUN apk del gcc g++ make tzdata;
+
 
 
 EXPOSE 9000
