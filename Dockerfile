@@ -90,7 +90,7 @@ RUN docker-php-source extract \
 #ImageMagick
 RUN set -xe && \
 	git clone https://github.com/ImageMagick/ImageMagick.git && \
-	&& cd ImageMagick && ./configure --with-bzlib=yes --with-fontconfig=yes --with-freetype=yes --with-gslib=yes --with-gvc=yes --with-jpeg=yes --with-jp2=yes --with-png=yes --with-tiff=yes && make clean && make && make install && \
+	cd ImageMagick && ./configure --with-bzlib=yes --with-fontconfig=yes --with-freetype=yes --with-gslib=yes --with-gvc=yes --with-jpeg=yes --with-jp2=yes --with-png=yes --with-tiff=yes && make clean && make && make install && \
 	make clean && ldconfig /usr/local/lib
 
 RUN set -xe && \
