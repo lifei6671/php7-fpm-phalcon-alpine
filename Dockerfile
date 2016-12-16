@@ -90,13 +90,13 @@ RUN docker-php-source extract \
 #ImageMagick
 RUN set -xe && \
 	curl -LO ftp://ftp.imagemagick.org/pub/ImageMagick/ImageMagick-7.0.3-10.tar.gz && \
-	tar zxvf ImageMagick-7.0.3-10.tar.gz && cd ImageMagick-7.0.3-10 && ./configure --prefix=/usr/local/imagemagick && make && make install && \
-	make clean && \
+	tar zxvf ImageMagick-7.0.3-10.tar.gz && cd ImageMagick-7.0.3-10 && ./configure --with-bzlib=yes --with-fontconfig=yes --with-freetype=yes --with-gslib=yes --with-gvc=yes --with-jpeg=yes --with-jp2=yes --with-png=yes --with-tiff=yes && make clean && make && make install && \
+	make clean && ldconfig /usr/local/lib && \
 	cd .. && rm -rf ImageMagick-7.0.3-10.tar.gz
 
 RUN set -xe && \
 	curl -LO https://github.com/mkoppanen/imagick/archive/3.4.2.tar.gz && \
-	tar zxvf  3.4.2.tar.gz && cd imagick-3.4.2 && phpize && ./configure  --with-php-config=/usr/local/bin/php-config --with-imagick=/usr/local/imagemagick && make && make install
+	tar zxvf  3.4.2.tar.gz && cd imagick-3.4.2 && phpize && ./configure  --with-php-config=/usr/local/bin/php-config --with-imagick=/usr/local/lib && make && make install
 	
 	
 	
