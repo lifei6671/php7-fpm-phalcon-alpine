@@ -79,6 +79,19 @@ RUN docker-php-source extract \
 	&& phpize && ./configure --with-php-config=/usr/local/bin/php-config && make && make install \
 	&& make clean \
 	&& docker-php-source delete
+
+#ImageMagick
+RUN set -xe && \
+	curl -LO ftp://ftp.imagemagick.org/pub/ImageMagick/ImageMagick-7.0.3-10.tar.gz && \
+	tar zxvf ImageMagick-7.0.3-10.tar.gz && cd ImageMagick-7.0.3-10 && ./configure --prefix=/usr/local/imagemagick && make && make install && \
+	make clean && \
+	cd .. && rm -rf ImageMagick-7.0.3-10.tar.gz
+
+RUN set -xe && \
+	curl -LO https://github.com/mkoppanen/imagick/archive/3.4.2.tar.gz && \
+	tar zxvf  3.4.2.tar.gz && cd 3.4.2 && phpize && ./configure  --with-php-config=/usr/local/php5/bin/php-config --with-imagick=/usr/local/imagemagick && make && make install
+	
+	
 	
 #Delete apk
 RUN apk del gcc g++ git make;
