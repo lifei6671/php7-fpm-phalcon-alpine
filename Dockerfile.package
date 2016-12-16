@@ -7,8 +7,10 @@ COPY usr/local/lib/php/extensions/no-debug-non-zts-20151012 /usr/local/lib/php/e
 ADD conf/php.ini /usr/local/etc/php/php.ini
 ADD conf/www.conf /usr/local/etc/php-fpm.d/www.conf
 
+ENV IMAGICK_VERSION 3.4.2
+
 #Alpine packages
-RUN apk add --update make gcc g++ \
+RUN apk add --update imagemagick-dev \
 	libc-dev \
 	autoconf \
 	freetype-dev \
@@ -22,7 +24,9 @@ RUN apk add --update make gcc g++ \
 	libmemcached-dev \
 	cyrus-sasl-dev \
 	binutils \
-	&& rm -rf /var/cache/apk/* 
+	&& pecl install imagick-$IMAGICK_VERSION \
+	&& rm -rf /var/cache/apk/* \
+	 
 
 RUN apk update && apk add ca-certificates && \
     apk add tzdata && \
@@ -49,14 +53,7 @@ COPY docker-entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 RUN ln -s usr/local/bin/docker-entrypoint.sh /entrypoint.sh # backwards compat
 
-#ImageMagick
-RUN set -xe && \
-	curl -LO ftp://ftp.imagemagick.org/pub/ImageMagick/ImageMagick-7.0.3-10.tar.gz && \
-	tar zxvf ImageMagick-7.0.3-10.tar.gz && cd ImageMagick-7.0.3-10 && ./configure --prefix=/usr/local/imagemagick && make && make install && \
-	make clean && \
-	cd .. && rm -rf ImageMagick-7.0.3-10.tar.gz ImageMagick-7.0.3-10
-
-RUN apk del gcc g++ make tzdata;
+RUN apk del gcc g++ make tzdata autoconf ;
 
 
 
