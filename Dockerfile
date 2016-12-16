@@ -5,8 +5,6 @@ MAINTAINER Minho <longfei6671@163.com>
 ADD conf/php.ini /usr/local/etc/php/php.ini
 ADD conf/www.conf /usr/local/etc/php-fpm.d/www.conf
 
-ENV IMAGICK_VERSION 3.4.2
-
 #Alpine packages
 RUN apk add --update git make gcc g++ \
 	libc-dev \
@@ -22,8 +20,6 @@ RUN apk add --update git make gcc g++ \
 	libmemcached-dev \
 	cyrus-sasl-dev \
 	binutils \
-	imagemagick-dev \
-	&& pecl install imagick-$IMAGICK_VERSION \
 	&& rm -rf /var/cache/apk/* 
 
 RUN apk update && apk add ca-certificates && \
@@ -38,14 +34,7 @@ RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-di
         && docker-php-ext-install zip \
         && docker-php-ext-install pdo \
         && docker-php-ext-install pdo_mysql \
-        && docker-php-ext-install opcache \
-		&& echo "extension=memcached.so" > /usr/local/etc/php/conf.d/memcached.ini \
-		&& echo "extension=redis.so" > /usr/local/etc/php/conf.d/phpredis.ini \
-		&& echo "extension=phalcon.so" > /usr/local/etc/php/conf.d/phalcon.ini \
-		&& echo "extension=igbinary.so" > /usr/local/etc/php/conf.d/igbinary.ini \
-		&& echo "extension=bcmath.so" > /usr/local/etc/php/conf.d/bcmath.ini \
-		&& echo "zend_extension=xdebug.so" >> /usr/local/etc/php/conf.d/xdebug.ini \
-		&& echo "extension=imagick.so" >> /usr/local/etc/php/conf.d/imagick.ini
+        && docker-php-ext-install opcache
 
 		
 WORKDIR /usr/src/php/ext/
@@ -91,6 +80,18 @@ RUN docker-php-source extract \
 	&& make clean \
 	&& docker-php-source delete
 
+#ImageMagick
+RUN set -xe && \
+	curl -LO ftp://ftp.imagemagick.org/pub/ImageMagick/ImageMagick-7.0.3-10.tar.gz && \
+	tar zxvf ImageMagick-7.0.3-10.tar.gz && cd ImageMagick-7.0.3-10 && ./configure --prefix=/usr/local/imagemagick && make && make install && \
+	make clean && \
+	cd .. && rm -rf ImageMagick-7.0.3-10.tar.gz
+
+RUN set -xe && \
+	curl -LO https://github.com/mkoppanen/imagick/archive/3.4.2.tar.gz && \
+	tar zxvf  3.4.2.tar.gz && cd imagick-3.4.2 && phpize && ./configure  --with-php-config=/usr/local/bin/php-configa --with-imagick=/usr/local/imagemagick && make && make install
+	
+	
 	
 #Delete apk
 RUN apk del gcc g++ git make;
