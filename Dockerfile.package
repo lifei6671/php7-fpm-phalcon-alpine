@@ -24,13 +24,11 @@ RUN apk add --update imagemagick-dev \
 	libmemcached-dev \
 	cyrus-sasl-dev \
 	binutils \
-	&& pecl install imagick-$IMAGICK_VERSION \
+	ca-certificates \
+	tzdata \
 	&& rm -rf /var/cache/apk/* \
-	 
 
-RUN apk update && apk add ca-certificates && \
-    apk add tzdata && \
-    ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
+RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
     echo "Asia/Shanghai" > /etc/timezone
 	
 RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
