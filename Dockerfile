@@ -23,7 +23,6 @@ RUN apk add --update git make gcc g++ imagemagick-dev \
 	libmemcached-dev \
 	cyrus-sasl-dev \
 	binutils \
-	&& pecl install imagick-$IMAGICK_VERSION \
 	&& rm -rf /var/cache/apk/* 
 
 RUN apk update && apk add ca-certificates && \
