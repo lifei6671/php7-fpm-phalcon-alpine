@@ -99,7 +99,9 @@ RUN set -xe && \
 #
 RUN set -xe && \
 	curl -LO  https://github.com/happyfish100/fastdfs/archive/master.tar.gz && \
-	tar xzf master.tar.gz && cd fastdfs-master/php_client && phpize && ./configure --with-php-config=/usr/local/bin/php-config && make &&  make install && \
+	tar xzf master.tar.gz && \
+	cd fastdfs-master && ./make.sh && ./make.sh install && \
+	cd php_client && phpize && ./configure --with-php-config=/usr/local/bin/php-config && make &&  make install && \
 	make clean 
 	
 RUN set -xe && \
