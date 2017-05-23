@@ -34,7 +34,7 @@ else
 fi
 
 if [ ! -z $tracker_server ] ; then
-	sed -i 's/^db_password.*/db_password='$tracker_server'/g' /etc/fdfs/client.conf
+	sed -i 's/^tracker_server.*/tracker_server='$tracker_server'/g' /etc/fdfs/client.conf
 fi
 
 if [ ! -z $tracker_server_port ] ; then
