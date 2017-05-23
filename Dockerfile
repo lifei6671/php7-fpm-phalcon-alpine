@@ -96,7 +96,12 @@ RUN set -xe && \
 	tar xzf 6.9.6-8.tar.gz && cd ImageMagick-6.9.6-8 && ./configure --with-bzlib=yes --with-fontconfig=yes --with-freetype=yes --with-gslib=yes --with-gvc=yes --with-jpeg=yes --with-jp2=yes --with-png=yes --with-tiff=yes && make clean && make && make install && \
 	make clean && ldconfig /usr/local/lib
 
-#
+#libfastcommon
+RUN set -xe && \
+	curl -LO https://github.com/happyfish100/libfastcommon/archive/master.tar.gz && \
+	tar xzf master.tar.gz && cd libfastcommon-master && ./make.sh && ./make.sh install 
+	
+#fastdfs
 RUN set -xe && \
 	curl -LO  https://github.com/happyfish100/fastdfs/archive/master.tar.gz && \
 	tar xzf master.tar.gz && \
