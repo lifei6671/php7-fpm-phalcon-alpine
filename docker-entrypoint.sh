@@ -48,4 +48,4 @@ fi
 #	set -- php-fpm "$@"
 #fi
 
-exec "$@"
+php-fpm
