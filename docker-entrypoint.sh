@@ -33,6 +33,13 @@ else
     echo "=> Xdebug is already configured"
 fi
 
+if [ ! -f $tracker_server ] ; then
+	sed -i 's/^db_password.*/db_password='$MYSQL_PASSWORD'/g' /etc/fdfs/client.conf
+fi
+
+if [ ! -f $tracker_server_port ] ; then
+	sed -i 's/^http.tracker_server_port=.*/http.tracker_server_port='$tracker_server_port'/g' /etc/fdfs/client.conf
+fi
 #exec php-fpm
 
 # first arg is `-f` or `--some-option`

@@ -4,6 +4,8 @@ MAINTAINER Minho <longfei6671@163.com>
 
 ADD conf/php.ini /usr/local/etc/php/php.ini
 ADD conf/www.conf /usr/local/etc/php-fpm.d/www.conf
+ADD conf/fastdfs_client.ini /usr/local/etc/php/conf.d/
+ADD conf/client.conf /etc/fdfs/
 
 ENV IMAGICK_VERSION 3.4.2
 #Alpine packages
@@ -95,6 +97,12 @@ RUN set -xe && \
 	tar xzf 6.9.6-8.tar.gz && cd ImageMagick-6.9.6-8 && ./configure --with-bzlib=yes --with-fontconfig=yes --with-freetype=yes --with-gslib=yes --with-gvc=yes --with-jpeg=yes --with-jp2=yes --with-png=yes --with-tiff=yes && make clean && make && make install && \
 	make clean && ldconfig /usr/local/lib
 
+#
+RUN set -xe && \
+	curl -LO  https://github.com/happyfish100/fastdfs/archive/master.tar.gz && \
+	tar xzf master.tar.gz && cd fastdfs-master/php_client && phpize && ./configure --with-php-config=/usr/local/bin/php-config && make &&  make install
+	make clean 
+	
 RUN set -xe && \
 	curl -LO https://github.com/mkoppanen/imagick/archive/3.4.2.tar.gz && \
 	tar zxvf  3.4.2.tar.gz && cd imagick-3.4.2 && phpize && ./configure  --with-php-config=/usr/local/bin/php-config --with-imagick=/usr/local/lib && make && make install
