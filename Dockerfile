@@ -11,6 +11,7 @@ ENV IMAGICK_VERSION 3.4.2
 #Alpine packages
 RUN apk add --update git make gcc g++ imagemagick-dev \
 	libc-dev \
+	pcre-dev \
 	autoconf \
 	freetype-dev \
 	libjpeg-turbo-dev \
