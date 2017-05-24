@@ -34,7 +34,9 @@ else
 fi
 
 if [ ! -z $tracker_server ] ; then
+	mkdir -p /tmp/fastdfs
 	sed -i 's/^tracker_server.*/tracker_server='$tracker_server'/g' /etc/fdfs/client.conf
+	sed -i 's/^base_path=.*/base_path=/tmp/fastdfs/g' /etc/fdfs/client.conf
 fi
 
 if [ ! -z $tracker_server_port ] ; then
